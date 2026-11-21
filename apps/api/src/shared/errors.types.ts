@@ -6,3 +6,5 @@ export type ErrorCode =
   | "conflict";
 
 export type DomainError = { code: ErrorCode; message: string; details?: unknown };
+
+export type ValidationIssue = { path: string; message: string };
