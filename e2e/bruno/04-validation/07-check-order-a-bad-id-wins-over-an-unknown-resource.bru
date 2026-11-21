@@ -1,0 +1,20 @@
+meta {
+  name: check order: a bad id wins over an unknown resource
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/reservations
+  body: json
+  auth: none
+}
+
+body:json {
+  {"id": "a b", "resource": "R9", "start": 10, "end": 20}
+}
+
+assert {
+  res.status: eq 422
+  res.body.error.code: eq "invalid_data"
+}

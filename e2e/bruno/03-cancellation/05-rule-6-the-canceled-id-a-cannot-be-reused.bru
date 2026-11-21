@@ -1,0 +1,20 @@
+meta {
+  name: RULE-6 the canceled id A cannot be reused
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/reservations
+  body: json
+  auth: none
+}
+
+body:json {
+  {"id": "A", "resource": "R2", "start": 10, "end": 20}
+}
+
+assert {
+  res.status: eq 409
+  res.body.error.code: eq "id_already_used"
+}

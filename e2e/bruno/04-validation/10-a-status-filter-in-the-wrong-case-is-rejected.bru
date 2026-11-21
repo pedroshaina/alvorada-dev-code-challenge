@@ -1,0 +1,16 @@
+meta {
+  name: a status filter in the wrong case is rejected
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{baseUrl}}/reservations?status=ACTIVE
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 422
+  res.body.error.code: eq "invalid_data"
+}

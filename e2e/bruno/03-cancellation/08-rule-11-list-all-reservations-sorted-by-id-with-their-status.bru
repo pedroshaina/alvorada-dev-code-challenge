@@ -1,0 +1,20 @@
+meta {
+  name: RULE-11 list all reservations sorted by id with their status
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{baseUrl}}/reservations
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body: length 2
+  res.body[0].id: eq "A"
+  res.body[0].status: eq "canceled"
+  res.body[1].id: eq "B"
+  res.body[1].status: eq "active"
+}

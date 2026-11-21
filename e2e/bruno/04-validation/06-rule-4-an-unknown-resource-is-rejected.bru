@@ -1,0 +1,20 @@
+meta {
+  name: RULE-4 an unknown resource is rejected
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/reservations
+  body: json
+  auth: none
+}
+
+body:json {
+  {"id": "V5", "resource": "R9", "start": 10, "end": 20}
+}
+
+assert {
+  res.status: eq 404
+  res.body.error.code: eq "resource_not_found"
+}

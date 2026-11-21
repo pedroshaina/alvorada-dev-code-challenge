@@ -1,0 +1,19 @@
+meta {
+  name: RULE-2 touching before X [0,10) is accepted
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/reservations
+  body: json
+  auth: none
+}
+
+body:json {
+  {"id": "W", "resource": "R1", "start": 0, "end": 10}
+}
+
+assert {
+  res.status: eq 201
+}

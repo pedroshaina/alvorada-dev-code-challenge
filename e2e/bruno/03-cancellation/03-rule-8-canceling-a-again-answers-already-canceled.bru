@@ -1,0 +1,17 @@
+meta {
+  name: RULE-8 canceling A again answers already_canceled
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/reservations/A/cancel
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.result: eq "already_canceled"
+  res.body.reservation.status: eq "canceled"
+}

@@ -1,0 +1,19 @@
+meta {
+  name: A on R1 [10,20) is accepted
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/reservations
+  body: json
+  auth: none
+}
+
+body:json {
+  {"id": "A", "resource": "R1", "start": 10, "end": 20}
+}
+
+assert {
+  res.status: eq 201
+}

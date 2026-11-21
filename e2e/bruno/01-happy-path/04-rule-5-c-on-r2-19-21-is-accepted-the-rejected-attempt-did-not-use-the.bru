@@ -1,0 +1,19 @@
+meta {
+  name: RULE-5 C on R2 [19,21) is accepted, the rejected attempt did not use the id
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/reservations
+  body: json
+  auth: none
+}
+
+body:json {
+  {"id": "C", "resource": "R2", "start": 19, "end": 21}
+}
+
+assert {
+  res.status: eq 201
+}

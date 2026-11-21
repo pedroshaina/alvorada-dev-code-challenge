@@ -1,0 +1,20 @@
+meta {
+  name: RULE-1 start after end is rejected
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{baseUrl}}/reservations
+  body: json
+  auth: none
+}
+
+body:json {
+  {"id": "E2", "resource": "R2", "start": 20, "end": 10}
+}
+
+assert {
+  res.status: eq 422
+  res.body.error.code: eq "invalid_data"
+}

@@ -1,0 +1,17 @@
+meta {
+  name: RULE-11 list only canceled reservations
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{baseUrl}}/reservations?status=canceled
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body: length 1
+  res.body[0].id: eq "A"
+}

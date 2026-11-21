@@ -1,0 +1,16 @@
+meta {
+  name: availability for an unknown resource is rejected
+  type: http
+  seq: 13
+}
+
+get {
+  url: {{baseUrl}}/resources/R9/availability?start=1&end=2
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 404
+  res.body.error.code: eq "resource_not_found"
+}

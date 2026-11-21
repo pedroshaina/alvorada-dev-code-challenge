@@ -1,0 +1,22 @@
+meta {
+  name: RULE-2 contained in X [12,15) conflicts
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/reservations
+  body: json
+  auth: none
+}
+
+body:json {
+  {"id": "C1", "resource": "R1", "start": 12, "end": 15}
+}
+
+assert {
+  res.status: eq 409
+  res.body.error.code: eq "conflict"
+  res.body.error.details.conflicts: length 1
+  res.body.error.details.conflicts[0].id: eq "X"
+}

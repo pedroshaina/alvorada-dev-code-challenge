@@ -1,0 +1,20 @@
+meta {
+  name: an id with a space is rejected
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/reservations
+  body: json
+  auth: none
+}
+
+body:json {
+  {"id": "a b", "resource": "R1", "start": 10, "end": 20}
+}
+
+assert {
+  res.status: eq 422
+  res.body.error.code: eq "invalid_data"
+}

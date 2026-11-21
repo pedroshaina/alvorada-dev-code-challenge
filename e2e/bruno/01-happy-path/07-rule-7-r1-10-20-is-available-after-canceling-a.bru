@@ -1,0 +1,17 @@
+meta {
+  name: RULE-7 R1 [10,20) is available after canceling A
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{baseUrl}}/resources/R1/availability?start=10&end=20
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.available: eq true
+  res.body.conflicts: isEmpty
+}

@@ -1,0 +1,19 @@
+meta {
+  name: RULE-10 R1 [19,21) is unavailable because of A and B
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/resources/R1/availability?start=19&end=21
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.available: eq false
+  res.body.conflicts: length 2
+  res.body.conflicts[0].id: eq "A"
+  res.body.conflicts[1].id: eq "B"
+}

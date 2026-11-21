@@ -1,0 +1,16 @@
+meta {
+  name: an unknown resource filter is rejected
+  type: http
+  seq: 11
+}
+
+get {
+  url: {{baseUrl}}/reservations?resource=R9
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 404
+  res.body.error.code: eq "resource_not_found"
+}

@@ -1,0 +1,17 @@
+meta {
+  name: RULE-7 cancel A
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/reservations/A/cancel
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.result: eq "canceled"
+  res.body.reservation.status: eq "canceled"
+}

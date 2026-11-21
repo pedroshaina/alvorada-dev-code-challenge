@@ -1,0 +1,16 @@
+meta {
+  name: RULE-9 canceling an unknown reservation fails
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/reservations/NOPE/cancel
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 404
+  res.body.error.code: eq "reservation_not_found"
+}

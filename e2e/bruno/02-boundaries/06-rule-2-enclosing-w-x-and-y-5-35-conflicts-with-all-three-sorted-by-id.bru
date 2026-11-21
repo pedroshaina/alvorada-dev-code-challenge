@@ -1,0 +1,24 @@
+meta {
+  name: RULE-2 enclosing W, X and Y [5,35) conflicts with all three, sorted by id
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/reservations
+  body: json
+  auth: none
+}
+
+body:json {
+  {"id": "C3", "resource": "R1", "start": 5, "end": 35}
+}
+
+assert {
+  res.status: eq 409
+  res.body.error.code: eq "conflict"
+  res.body.error.details.conflicts: length 3
+  res.body.error.details.conflicts[0].id: eq "W"
+  res.body.error.details.conflicts[1].id: eq "X"
+  res.body.error.details.conflicts[2].id: eq "Y"
+}

@@ -1,0 +1,20 @@
+meta {
+  name: a float time is rejected
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/reservations
+  body: json
+  auth: none
+}
+
+body:json {
+  {"id": "V1", "resource": "R1", "start": 10.5, "end": 20}
+}
+
+assert {
+  res.status: eq 422
+  res.body.error.code: eq "invalid_data"
+}

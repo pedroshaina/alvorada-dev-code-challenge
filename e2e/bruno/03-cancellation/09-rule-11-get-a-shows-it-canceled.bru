@@ -1,0 +1,16 @@
+meta {
+  name: RULE-11 get A shows it canceled
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{baseUrl}}/reservations/A
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.status: eq "canceled"
+}
