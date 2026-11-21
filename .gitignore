@@ -1,0 +1,6 @@
+.internal/
+.superpowers/
+node_modules/
+dist/
+.env
+e2e-results/
