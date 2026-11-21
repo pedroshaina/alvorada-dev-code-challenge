@@ -1,0 +1,16 @@
+enum ReservationStatus {
+  active
+  canceled
+}
+
+model Reservation {
+  id        String            @id
+  resource  String
+  start     Int
+  end       Int
+  status    ReservationStatus @default(active)
+  createdAt DateTime          @default(now()) @map("created_at")
+
+  @@index([resource, status])
+  @@map("reservations")
+}

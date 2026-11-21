@@ -1,0 +1,10 @@
+**/node_modules
+**/dist
+**/.env
+apps/api/src/generated
+.git
+.internal
+.superpowers
+.impeccable
+.playwright-mcp
+e2e-results
