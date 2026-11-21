@@ -12,3 +12,13 @@ COPY apps/api apps/api
 WORKDIR /app/apps/api
 ENV PATH=/app/apps/api/node_modules/.bin:$PATH
 CMD ["sh", "-c", "prisma migrate deploy && exec tsx src/main.ts"]
+
+FROM base AS web-build
+COPY apps/web/package.json apps/web/
+RUN pnpm install --frozen-lockfile --filter @reservations/web
+COPY apps/web apps/web
+RUN pnpm --filter @reservations/web build
+
+FROM nginx:1.29-alpine AS web
+COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=web-build /app/apps/web/dist /usr/share/nginx/html
